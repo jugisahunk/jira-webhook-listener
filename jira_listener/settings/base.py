@@ -35,6 +35,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'listener.apps.ListenerConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -80,11 +81,14 @@ WSGI_APPLICATION = 'jira_listener.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': get_env_variable('DATABASE_NAME'),
+        'USER': get_env_variable('DATABASE_USER'),
+        'PASSWORD': get_env_variable('DATABASE_PASSWORD'),
+        'HOST': get_env_variable('DATABASE_HOST'),
+        'PORT': get_env_variable('DATABASE_PORT'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators

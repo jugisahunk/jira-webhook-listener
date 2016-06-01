@@ -13,8 +13,10 @@ class NewVisitorTest(unittest.TestCase):
         self.browser.quit()
  
     def test_it_worked(self):
-        self.browser.get('http://localhost:8000')
-        self.assertIn('Welcome to Django', self.browser.title)
+        self.browser.get('http://localhost:8000/listener')
+        self.browser.implicitly_wait(3)
+        heading = self.browser.find_element_by_id("greeting")
+        self.assertEqual('Hello World', heading.text) 
  
 if __name__ == '__main__':
     unittest.main(warnings='ignore')
